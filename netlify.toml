@@ -1,0 +1,14 @@
+# MendixGo — static PWA. Deploy on Netlify (or any static host).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# HashRouter means routes live in the URL hash, so no SPA rewrite is needed,
+# but this keeps deep links safe on hosts that try to resolve paths.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

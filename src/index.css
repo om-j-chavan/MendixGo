@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --green: #58cc02;
+  --green-hover: #61e002;
+  --green-shadow: #46a302;
+  --blue: #1cb0f6;
+  --blue-shadow: #1899d6;
+  --red: #ff4b4b;
+  --orange: #ff9600;
+  --gold: #ffc800;
+  --title: #3c3c3c;
+  --text: #4b4b4b;
+  --muted: #afafaf;
+  --border: #e5e5e5;
+  --bg: #ffffff;
+  --bg-soft: #f7f7f7;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* light, calm backdrop — no grid */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--bg);
+}
+.app-grid {
+  display: none;
+}
+
+@layer components {
+  /* soft white card (Duolingo style) */
+  .glass {
+    @apply bg-white rounded-2xl;
+    border: 2px solid var(--border);
+  }
+  .card-hover {
+    @apply transition-transform duration-150;
+  }
+  .card-hover:hover {
+    @apply -translate-y-0.5;
+    border-color: #d4d4d4;
+    background: #f7f9fb;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2.5 font-extrabold tracking-wide select-none;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: filter 0.12s, transform 0.06s, box-shadow 0.06s;
+    border: none;
+    cursor: pointer;
+  }
+  /* the signature Duolingo 3D button */
+  .btn-primary {
+    @apply btn text-white;
+    background: var(--green);
+    box-shadow: 0 4px 0 var(--green-shadow);
+  }
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--green-shadow);
+  }
+  .btn-primary:disabled {
+    background: #e5e5e5;
+    color: #afafaf;
+    box-shadow: 0 4px 0 #d0d0d0;
+    cursor: default;
+  }
+  .btn-ghost {
+    @apply btn;
+    color: var(--text);
+    background: #fff;
+    border: 2px solid var(--border);
+    box-shadow: 0 2px 0 var(--border);
+  }
+  .btn-ghost:hover {
+    background: var(--bg-soft);
+  }
+  .btn-ghost:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold;
+    background: var(--bg-soft);
+    color: #777;
+  }
+
+  .auth-input {
+    @apply w-full rounded-2xl px-3.5 py-2.5 text-[15px] outline-none;
+    background: var(--bg-soft);
+    border: 2px solid var(--border);
+    color: var(--title);
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .auth-input:focus {
+    border-color: var(--blue);
+    background: #fff;
+  }
+  .auth-input::placeholder {
+    color: var(--muted);
+  }
+}
+
+/* code snippets (used in Python/Cortex answers) */
+code,
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+  font-size: 0.88em;
+  background: #f0f2f5;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: #2b5fd0;
+  word-break: break-word;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 999px;
+  border: 2px solid #f0f0f0;
+}
+::selection {
+  background: rgba(88, 204, 2, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
